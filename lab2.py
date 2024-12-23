@@ -1,6 +1,7 @@
 from collections import deque
 
 table = {
+    #множество направляющих символов #next #return #stack #accept #error
     1: ['end ) ( const var: true false function && || number', 19, 0, 0, 0, 1],
     2: ['* /', 22, 0, 0, 0, 0],
     3: ['end ) && ||', 25, 0, 0, 0, 1],
