@@ -57,7 +57,7 @@ class Elevator:
     }
 
 
-n = 4 #кол-во этажей
+n = 7 #кол-во этажей
 distance = [[1] * n for _ in range(n)]
 
 #создание списка действий и массива n*m 
@@ -68,9 +68,7 @@ distance = [[1] * n for _ in range(n)]
 def generate_actions(n):
     actions = {} 
     for i in range(1, n+1): 
-        for j in range(i, n+1): 
-            actions[(i, j)] = "OpenDoor"
-            actions[(j, i)] = "OpenDoor"
+        actions[(i, i)] = "OpenDoor"
 
     for i in range(1, n+1):
         for j in range(i+1, n+1):
@@ -81,8 +79,8 @@ def generate_actions(n):
 
 actions = generate_actions(n)
 
-calls = ((2, 4), (1, 2), (3, 1), (2, 2), (1, 3))
-elevators = [Elevator(1), Elevator(1)]
+calls = [(5, 7), (3, 6), (2, 4), (1, 5), (7, 2), (4, 3), (6, 1), (2, 7)]
+elevators = [Elevator(1), Elevator(7)]
 
 for call in calls:
     n, m = abs(call[0] - elevators[0].floor), abs(call[0] - elevators[1].floor)
