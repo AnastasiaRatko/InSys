@@ -59,21 +59,3 @@ class DoorsOpenState(ElevatorState):
 
     def move(self, elevator, target_floor):
         print("Двери должны быть закрыты перед движением.")
-
-class StoppedState(ElevatorState):
-    def call_elevator(self, elevator, call_floor):
-        elevator.requests.append(call_floor)
-        print(f"Лифт вызван на этаж {call_floor}.")
-        elevator.state = MovingState()
-        elevator.move(call_floor)
-
-    def open_doors(self, elevator):
-        elevator.state = DoorsOpenState()
-        elevator.open_doors()
-
-    def close_doors(self, elevator):
-        elevator.state = IdleState()
-        elevator.close_doors()
-
-    def move(self, elevator, target_floor):
-        elevator.move(target_floor)
