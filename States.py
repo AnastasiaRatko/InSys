@@ -33,7 +33,7 @@ class IdleState(ElevatorState):
 class MovingState(ElevatorState):
     def call_elevator(self, elevator, call_floor):
         elevator.requests.append(call_floor)
-        print("Лифт уже в движении. Вызов добавлен в очередь.")
+        print("Лифт уже в движении.")
 
     def open_doors(self, elevator):
         print("Двери не могут быть открыты во время движения.")
