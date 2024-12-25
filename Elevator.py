@@ -20,7 +20,7 @@ class Elevator:
         print(f"Лифт движется на этаж {target_floor}. Пройденное расстояние: {distance} этажей.")
         self.current_floor = target_floor
         self.open_doors()
-        self.state = StoppedState()  # Переключаемся в состояние остановки после открытия дверей
+        self.state = StoppedState()
         self.handle_requests()
 
     def handle_requests(self):
