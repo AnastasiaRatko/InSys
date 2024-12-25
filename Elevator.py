@@ -1,4 +1,4 @@
-from States import IdleState, StoppedState
+from States import IdleState
 
 class Elevator:
     def __init__(self, floor):
