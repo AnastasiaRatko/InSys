@@ -30,7 +30,7 @@ table = {
     26: ['( const var: true false function number', 7, 0, 1, 0, 1],
     27: ['+ - * / ) && || end', 5, 0, 0, 0, 0],
     28: ['+ -', 29, 0, 0, 1, 1],
-    29: ['( const var: true false function number', 7, 0, 1, 0, 0],
+    29: ['( const var: true false function number', 7, 0, 1, 0, 1],
     30: ['+ - * / ) end', 5, 0, 0, 0, 1],
     31: ['* / ) && || end', -1, 1, 0, 0, 1],
     32: ['(', 33, 0, 0, 1, 1],
@@ -57,6 +57,8 @@ table = {
     53: ['&& || * / + - ) end', -1, 1, 0, 0, 1]
 }
 
+
+
 def analyze_expression(expression):
     state = 1
     tokens = expression.split() + ["end"]
@@ -67,16 +69,19 @@ def analyze_expression(expression):
 
         while not (accepted or error or end_of_expression):
             end_of_expression = (token == "end" and (token in table[state][0]) and len(stack) == 0)
+
             token = "const" if token.isdigit() else token
 
             keywords = "; ): && || ) ( true false * / + - int bool char end const function".split()
             if token not in keywords and len(tokens) > 1:
                 next_token = tokens[tokens.index(token) + 1]
+                
                 token = "function" if next_token == '(' else token
                 token = "var:" if token not in keywords else token
 
             if token in table[state][0] and not end_of_expression:
                 next_state = stack.pop() if table[state][2] == 1 else table[state][1]
+
                 if table[state][3] == 1:
                     stack.append(state + 1)
                 if table[state][4] == 1:
