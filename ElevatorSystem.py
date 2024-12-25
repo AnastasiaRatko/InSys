@@ -1,8 +1,8 @@
 from Elevator import Elevator
 
 class ElevatorSystem:
-    def __init__(self, firstFloor, secondFloor):
-        self.elevators = [Elevator(firstFloor), Elevator(secondFloor)]
+    def __init__(self, floorForFirst, floorForSecond):
+        self.elevators = [Elevator(floorForFirst), Elevator(floorForSecond)]
 
     def find_nearest_elevator(self, call_floor):
         return min(self.elevators, key=lambda elevator: abs(elevator.current_floor - call_floor))
@@ -15,3 +15,4 @@ class ElevatorSystem:
             elevator.move(target_floor)
             elevator.close_doors()
             print("")
+        

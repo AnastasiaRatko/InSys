@@ -1,4 +1,4 @@
-from States import IdleState
+from States import IdleState, StoppedState
 
 class Elevator:
     def __init__(self, floor):
@@ -20,3 +20,12 @@ class Elevator:
         print(f"Лифт движется на этаж {target_floor}. Пройденное расстояние: {distance} этажей.")
         self.current_floor = target_floor
         self.open_doors()
+        self.state = StoppedState()  # Переключаемся в состояние остановки после открытия дверей
+        self.handle_requests()
+
+    def handle_requests(self):
+        while self.requests:
+            next_floor = self.requests.pop(0)
+            self.close_doors()
+            self.move(next_floor)
+
