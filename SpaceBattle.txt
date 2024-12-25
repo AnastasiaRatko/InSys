@@ -1,0 +1,14 @@
+Game can StartGame, StopGame
+Player can control SpaceShipFirst, SpaceShipSecond
+SpaceShipFirst have fuel 50
+SpaceShipSecond have fuel 100
+SpaceShipFirst, SecondSpaceShip can StartMove, StopMove, ShootCommand, Rotate, BeDestroyed, Respawn
+ShootCommand fire Bullet
+Bullet can StartMove, BeDestroyed
+StartMove include MoveCommand, Move
+MoveCommand predates Move
+Move include BurnFuel
+Game must CheckCollision, CheckFuel while StartMove
+CheckCollision predates BeDestroyed
+CheckFuel predates StopMove
+BeDestroyed predates Respawn
