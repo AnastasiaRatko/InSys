@@ -21,11 +21,3 @@ class Elevator:
         self.current_floor = target_floor
         self.open_doors()
         self.state = StoppedState()
-        self.handle_requests()
-
-    def handle_requests(self):
-        while self.requests:
-            next_floor = self.requests.pop(0)
-            self.close_doors()
-            self.move(next_floor)
-
