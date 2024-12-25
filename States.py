@@ -16,7 +16,7 @@ class IdleState(ElevatorState):
     def call_elevator(self, elevator, call_floor):
         elevator.requests.append(call_floor)
         print(f"Лифт вызван на этаж {call_floor}.")
-        elevator.state = MovingState()
+        elevator.state = elevator.get_moving_state(call_floor)
         elevator.move(call_floor)
 
     def open_doors(self, elevator):
@@ -30,10 +30,26 @@ class IdleState(ElevatorState):
         elevator.move(target_floor)
 
 
-class MovingState(ElevatorState):
+class MovingUpState(ElevatorState):
     def call_elevator(self, elevator, call_floor):
         elevator.requests.append(call_floor)
-        print("Лифт уже в движении.")
+        print("Лифт уже движется вверх.")
+
+    def open_doors(self, elevator):
+        print("Двери не могут быть открыты во время движения.")
+
+    def close_doors(self, elevator):
+        elevator.state = IdleState()
+        elevator.close_doors()
+
+    def move(self, elevator, target_floor):
+        elevator.move(target_floor)
+
+
+class MovingDownState(ElevatorState):
+    def call_elevator(self, elevator, call_floor):
+        elevator.requests.append(call_floor)
+        print("Лифт уже движется вниз.")
 
     def open_doors(self, elevator):
         print("Двери не могут быть открыты во время движения.")

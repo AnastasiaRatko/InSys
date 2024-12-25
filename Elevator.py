@@ -1,4 +1,4 @@
-from States import IdleState
+from States import IdleState, MovingDownState, MovingUpState
 
 class Elevator:
     def __init__(self, floor):
@@ -21,3 +21,10 @@ class Elevator:
         self.current_floor = target_floor
         self.open_doors()
         self.state = IdleState()
+
+    def get_moving_state(self, call_floor):
+        states = {
+            True: MovingUpState(),
+            False: MovingDownState()
+        }
+        return states[call_floor > self.current_floor]
