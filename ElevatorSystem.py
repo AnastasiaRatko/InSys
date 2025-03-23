@@ -1,5 +1,6 @@
 from Elevator import Elevator
 from States import MovingUpState
+from States import MovingDownState
 
 class ElevatorSystem:
     def __init__(self, floorForFirst, floorForSecond):
@@ -9,16 +10,20 @@ class ElevatorSystem:
         def elevator_score(elevator):
             distance = abs(elevator.current_floor - call_floor)
             direction_penalty = {
-                (True, True): 0, 
-                (True, False): 100,
-                (False, True): 100,
-                (False, False): 0 
+                (True, False, True): 0,
+                (True, False, False): 100,
+                (False, True, True): 100,
+                (False, True, False): 0,
+                
+                (False, False, True): 0,
+                (False, False, False): 0
             }
 
             is_moving_up = isinstance(elevator.state, MovingUpState)
+            is_moving_down = isinstance(elevator.state, MovingDownState)
             is_call_above = call_floor > elevator.current_floor
 
-            penalty = direction_penalty[(is_moving_up, is_call_above)]
+            penalty = direction_penalty[(is_moving_up, is_moving_down, is_call_above)]
             
             return distance + penalty
 
